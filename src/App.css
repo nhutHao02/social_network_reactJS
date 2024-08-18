@@ -15,6 +15,7 @@
   --color-soft: #aaaaaa;
   --color-border: lightgray;
   --color-red: red;
+  --bg-color-active: rgba(192, 192, 192, 0.268);
 }
 .container {
   max-width: 991px;
