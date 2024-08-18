@@ -31,14 +31,15 @@
 
 .row:hover {
     width: 90%;
-    background-color:rgba(192, 192, 192, 0.536);
+    background-color:var(--bg-color-active);
     border-radius: 70px;
     font-weight: bold; 
 }
 
 .row.active {
-    background-color: rgba(192, 192, 192, 0.536);
-    color: black;
+    width: 90%;
+    background-color:var(--bg-color-active);
+    border-radius: 70px;
     font-weight: bold; 
 }
 .row p {
@@ -63,7 +64,7 @@
 
 .info_user:hover {
     width: 90%;
-    background-color:rgba(192, 192, 192, 0.536);
+    background-color: var(--bg-color-active);
     border-radius: 70px;
 }
 .info_user .img img{
