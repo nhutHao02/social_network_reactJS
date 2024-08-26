@@ -6,7 +6,7 @@ export default function Nav() {
   return (
     <div className="nav_container">
       <Link to="/" className="logo">
-        <p>ABC</p>
+        <p className="text-[#c6c3ff]">RPM</p>
       </Link>
       <NavLink exact to="/home" activeClassName="active" className="row">
         <p>

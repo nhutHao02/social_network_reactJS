@@ -22,8 +22,8 @@ export default function TweetCard({ props }) {
     } else if (diffInHours < 24) {
       return `${diffInHours}h`;
     } else {
-      const day = inputDate.getDate().toString().padStart(2, '0');
-      const month = (inputDate.getMonth() + 1).toString().padStart(2, '0'); // Tháng bắt đầu từ 0
+      const day = inputDate.getDate().toString().padStart(2, "0");
+      const month = (inputDate.getMonth() + 1).toString().padStart(2, "0"); // Tháng bắt đầu từ 0
       const year = inputDate.getFullYear();
       return `${day}/${month}/${year}`;
     }
@@ -41,8 +41,11 @@ export default function TweetCard({ props }) {
             />
             <div>
               <div className="flex">
-              <p className="font-semibold text-black">{tweet.fullName}</p>
-              <p className="text-gray-400 font-light pl-1 text-sm pt-[3px]"> • {formatTimeFromNow(tweet.timestamp)}</p>
+                <p className="font-semibold text-black">{tweet.fullName}</p>
+                <p className="text-gray-400 font-light pl-1 text-sm pt-[3px]">
+                  {" "}
+                  • {formatTimeFromNow(tweet.timestamp)}
+                </p>
               </div>
               <h3 className="text-gray-400 font-light">@abcsdf</h3>
               <div>
