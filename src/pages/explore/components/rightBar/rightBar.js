@@ -1,87 +1,10 @@
 import React from "react";
 import "./rightBar.css";
 
-export default function RightBar() {
+export default function ExploreRightBar() {
   return (
     <div className="rightbar_container h-full">
-      <div className="flex border-2 mx-2 bg-gray-300 rounded-full mt-4 sticky top-0 z-[1]">
-        <div className="px-3 py-1">
-          <i class="fa fa-search" aria-hidden="true"></i>
-        </div>
-        <input className="bg-gray-300 w-max" placeholder="Search...." />
-      </div>
-
-      <div className="mx-4 border-2 border-gray-200 rounded-2xl mt-2 bg-gray-200">
-        <p className="p-2 font-bold text-black">Trending</p>
-        <div className="px-2">
-          <div className="flex justify-between">
-            <p className="text-[11px]">Trending in VietNam</p>
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </div>
-          <p className="text-[15px] font-semibold mt-[-2px] text-black">
-            Beauty
-          </p>
-          <p className="text-[11px] mt-[-2px]">12.3K posts</p>
-        </div>
-        <div className="p-2">
-          <div className="flex justify-between">
-            <p className="text-[11px]">Trending in VietNam</p>
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </div>
-          <p className="text-[15px] font-semibold mt-[-2px] text-black">AIDS</p>
-          <p className="text-[11px] mt-[-2px]">123K posts</p>
-        </div>
-        <div className="p-2">
-          <div className="flex justify-between">
-            <p className="text-[11px]">Trending in VietNam</p>
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </div>
-          <p className="text-[15px] font-semibold mt-[-2px] text-black">
-            React
-          </p>
-          <p className="text-[11px] mt-[-2px]">23K posts</p>
-        </div>
-        <div className="p-2">
-          <div className="flex justify-between">
-            <p className="text-[11px]">Trending in VietNam</p>
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </div>
-          <p className="text-[15px] font-semibold mt-[-2px] text-black">Baby</p>
-          <p className="text-[11px] mt-[-2px]">3.2K posts</p>
-        </div>
-        <div className="p-2">
-          <div className="flex justify-between">
-            <p className="text-[11px]">Trending in VietNam</p>
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </div>
-          <p className="text-[15px] font-semibold mt-[-2px] text-black">
-            HelloWord
-          </p>
-          <p className="text-[11px] mt-[-2px]">153.2K posts</p>
-        </div>
-        <div className="p-2">
-          <div className="flex justify-between">
-            <p className="text-[11px]">Trending in VietNam</p>
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </div>
-          <p className="text-[15px] font-semibold mt-[-2px] text-black">
-            Golang
-          </p>
-          <p className="text-[11px] mt-[-2px]">22.7K posts</p>
-        </div>
-        <div className="p-2">
-          <div className="flex justify-between">
-            <p className="text-[11px]">Trending in VietNam</p>
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </div>
-          <p className="text-[15px] font-semibold mt-[-2px] text-black">
-            JavaScript
-          </p>
-          <p className="text-[11px] mt-[-2px]">1.2K posts</p>
-        </div>
-      </div>
-
-      <div className="mx-4 border-2 border-gray-200 rounded-2xl mt-2 bg-gray-200">
+      <div className="mx-4 border-2 border-gray-200 rounded-2xl mt-4 bg-gray-200">
         <p className="p-2 font-bold text-black">Who to follow</p>
         <div>
           <div className="flex justify-between p-2">
