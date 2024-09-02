@@ -5,7 +5,7 @@ export default function CenterExplore() {
     const [selected, setSelected] = useState('Trending');
   return (
     <div className="min-w-[50%] h-full ml-[calc(20%+100px)] mr-0">
-      <div className="border-b-[1px] border-gray-300 ">
+      <div className="border-b-[1px] border-gray-300">
         <div className="flex border-2 mx-2 bg-gray-300 rounded-full mt-4 sticky top-0 z-[1]">
             <div className="px-3 py-1">
             <i class="fa fa-search" aria-hidden="true"></i>
