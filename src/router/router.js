@@ -7,6 +7,7 @@ import Explore from "../pages/explore/explore";
 import Notification from "../pages/notification/notification";
 import Message from "../pages/message/message";
 import Bookmarks from "../pages/bookmark/bookmark";
+import Profile from "../pages/profile/profile";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ export const router = createBrowserRouter([
       },
       { 
         path: "/profile",
-        element: <Message/>
+        element: <Profile/>
       },
     ],
   },
