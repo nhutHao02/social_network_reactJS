@@ -13,8 +13,21 @@ const ENDPOINTS = {
             url: `${BASE_URL}/users`,
             requiresToken: true,
             responseType: 'json'
+        },
+    },
+    AUTH: {
+        SIGN_UP: {
+            method: 'POST',
+            url: `${BASE_URL}/auth/sign-up`,
+            requiresToken: true,
+            responseType: 'json'
+        },
+        LOGIN: {
+            method: 'POST',
+            url: `${BASE_URL}/auth/log-in`,
+            requiresToken: true,
+            responseType: 'json'
         }
-       
     }
 }
 export default ENDPOINTS
