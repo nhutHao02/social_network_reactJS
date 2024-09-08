@@ -19,12 +19,20 @@ const ENDPOINTS = {
         SIGN_UP: {
             method: 'POST',
             url: `${BASE_URL}/auth/sign-up`,
-            requiresToken: true,
+            requiresToken: false,
             responseType: 'json'
         },
         LOGIN: {
             method: 'POST',
             url: `${BASE_URL}/auth/log-in`,
+            requiresToken: false,
+            responseType: 'json'
+        }
+    },
+    NOTIFICATION: {
+        GET_NOTIFICATIONS: {
+            method: 'GET',
+            url: ({userID, page = 0, limit = 12}) => `${BASE_URL}/notification/get/${userID}?page=${page}&limit=${limit}`,
             requiresToken: true,
             responseType: 'json'
         }
