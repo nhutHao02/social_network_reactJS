@@ -14,6 +14,12 @@ const ENDPOINTS = {
             requiresToken: true,
             responseType: 'json'
         },
+        GET_BOOKMARK_TWEETS: {
+            method: 'GET',
+            url: ({userName, page = 0, limit = 10}) => `${BASE_URL}/tweet-saved/get-saved-tweet?page=${page}&limit=${limit}&userName=${userName}`,
+            requiresToken: true,
+            responseType: 'json'
+        },
     },
     AUTH: {
         SIGN_UP: {

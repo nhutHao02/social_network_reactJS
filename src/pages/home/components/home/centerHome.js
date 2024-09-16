@@ -7,24 +7,32 @@ import TweetCard from "./components/tweetCard";
 
 export default function CenterHome() {
   const [tweets, setTweets] = useState([]);
+  const [page, setPage] = useState(0);
+  const [limnit, _] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      var response = await perform(ENDPOINTS.TWEETS.GET_TWEETS, {
+        page: page,
+        limit: limnit,
+      });
+      if (response.code == ResponseCode.OK) {
+        // setTweets(response.data);
+        setTweets((prevTweets) => [...prevTweets, ...response.data]);
+        setPage((prevPage) => prevPage + 1);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        var response = await perform(ENDPOINTS.TWEETS.GET_TWEETS, {
-          page: 0,
-          limit: 10,
-        });
-        if (response.code == ResponseCode.OK) {
-          setTweets(response.data);
-        } else {
-          console.log(response);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -53,6 +61,7 @@ export default function CenterHome() {
       ) : (
         <p>No tweets available</p>
       )}
+      {isLoading && <p>Loading...</p>}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import ENDPOINTS from "./API";
 const perform = async (endpoint, params = {}, payload = {}) => {
   const { method, url, requiresToken, responseType } = endpoint;
   const fullUrl = typeof url === 'function' ? url(params) : url;
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
   if (requiresToken && !token) {
     console.error('Error: Token is required but not found.');

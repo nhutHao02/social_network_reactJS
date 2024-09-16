@@ -12,7 +12,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
       navigate("/home");
     }
@@ -28,7 +28,8 @@ export default function Login() {
     try {
       var response = await perform(ENDPOINTS.AUTH.LOGIN, {}, loginData);
       if (response.code == ResponseCode.OK) {
-        sessionStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", response.data.userName)
         navigate("/home");
       } else {
         console.log(response);
