@@ -1,8 +1,76 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
+import ENDPOINTS from "../../service/API";
+import perform from "../../service/Service";
+import { ResponseCode } from "../../service/Code";
+import TweetCard from "../home/components/home/components/tweetCard";
 
 export default function CenterProfile() {
-  const [selected, setSelected] = useState('Posts');
+  
+  const [tweets, setTweets] = useState([]);
+  const [page, setPage] = useState(0);
+  const [limnit, _] = useState(10);
+
+  const Tabs = {
+    POSTS: {
+      title: "Posts",
+      endpoint: ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS,
+      params: {
+        userName: localStorage.getItem("user"),
+        page: page,
+        limit: limnit,
+      }
+    },
+    REPOSTS: {
+      title: "RePosts",
+      endpoint: ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS,
+      params: {
+        userName: localStorage.getItem("user"),
+        page: page,
+        limit: limnit,
+      }
+    },
+    LOVES: {
+      title: "Loves",
+      endpoint: ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS,
+      params: {
+        userName: localStorage.getItem("user"),
+        page: page,
+        limit: limnit,
+      }
+    },
+    BOOKMARKS: {
+      title: "Bookmarks",
+      endpoint: ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS,
+      params: {
+        userName: localStorage.getItem("user"),
+        page: page,
+        limit: limnit,
+      }
+    },
+  }
+  const [selected, setSelected] = useState(Tabs.POSTS);
+  const fetchData = async () => {
+    try {
+      var response = await perform(selected.endpoint, 
+        selected.params
+      );
+      if (response.code == ResponseCode.OK) {
+        setTweets(response.data);
+        // setTweets((prevTweets) => [...prevTweets, ...response.data]);
+        // setPage((prevPage) => prevPage + 1);
+        console.log(response);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [selected]);
 
   return (
     <div className="min-w-[50%] h-full ml-[calc(20%+100px)] mr-0">
@@ -42,19 +110,41 @@ export default function CenterProfile() {
         </div>
 
         <div className="flex border-b-[1px] border-gray-300 justify-center space-x-24 px-7 py-3 ">
-            <div onClick={() => setSelected('Posts')} className={`cursor-pointer ${selected === 'Posts' ? 'border-b-2 border-blue-700' : ''}`}>
+            <div onClick={() => setSelected(Tabs.POSTS)} className={`cursor-pointer ${selected.title === 'Posts' ? 'border-b-2 border-blue-700' : ''}`}>
                 <p className="text-black font-bold">Posts</p>
             </div>
-            <div onClick={() => setSelected('RePosts')} className={`cursor-pointer ${selected === 'RePosts' ? 'border-b-2 border-blue-700' : ''}`}>
+            <div onClick={() => setSelected(Tabs.REPOSTS)} className={`cursor-pointer ${selected.title === 'RePosts' ? 'border-b-2 border-blue-700' : ''}`}>
                 <p className="text-black font-bold">RePosts</p>
             </div>
-            <div onClick={() => setSelected('Loves')} className={`cursor-pointer ${selected === 'Loves' ? 'border-b-2 border-blue-700' : ''}`}>
+            <div onClick={() => setSelected(Tabs.LOVES)} className={`cursor-pointer ${selected.title === 'Loves' ? 'border-b-2 border-blue-700' : ''}`}>
                 <p className="text-black font-bold">Loves</p>
             </div>
-            <div onClick={() => setSelected('Bookmarks')} className={`cursor-pointer ${selected === 'Bookmarks' ? 'border-b-2 border-blue-700' : ''}`}>
+            <div onClick={() => setSelected(Tabs.BOOKMARKS)} className={`cursor-pointer ${selected.title === 'Bookmarks' ? 'border-b-2 border-blue-700' : ''}`}>
                 <p className="text-black font-bold">Bookmarks</p>
             </div>
         </div>
+        
+        {tweets && tweets.length > 0 ? (
+        tweets.map((tweet, index) => (
+          <TweetCard
+            key={index}
+            props={{
+              urlAvt: tweet.user.urlAvt,
+              fullName: tweet.user.fullName,
+              urlImage: tweet.urlImage,
+              urlVideo: tweet.urlVideo,
+              loves: tweet.totalLove,
+              comments: tweet.totalComment,
+              reposts: tweet.totalRepost,
+              saves: tweet.totalSaved,
+              content: tweet.content,
+              timestamp: tweet.createAt,
+            }}
+          />
+        ))
+      ) : (
+        <p>No tweets available</p>
+      )}
       </div>
     </div>
   );
