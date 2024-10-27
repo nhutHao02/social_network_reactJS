@@ -14,7 +14,7 @@ export default function CenterBookMark() {
     setIsLoading(true);
     try {
       var response = await perform(ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS, {
-        userName: localStorage.getItem("user"),
+        userID: localStorage.getItem("id"),
         page: page,
         limit: limnit,
       });
@@ -45,6 +45,7 @@ export default function CenterBookMark() {
           <TweetCard
             key={index}
             props={{
+              id: tweet.id,
               urlAvt: tweet.user.urlAvt,
               fullName: tweet.user.fullName,
               urlImage: tweet.urlImage,

@@ -16,16 +16,47 @@ const ENDPOINTS = {
         },
         GET_BOOKMARK_TWEETS: {
             method: 'GET',
-            url: ({userName, page = 0, limit = 10}) => `${BASE_URL}/tweet-saved/get-saved-tweet?page=${page}&limit=${limit}&userName=${userName}`,
+            url: ({userID, page = 0, limit = 10}) => `${BASE_URL}/tweet-saved/get-saved-tweet/${userID}?page=${page}&limit=${limit}`,
             requiresToken: true,
             responseType: 'json'
         },
-        GET_TWEETS_BY_USER: {
+        GET_TWEETS_BY_USERID: {
             method: 'GET',
-            url: ({userName, page = 0, limit = 10}) => `${BASE_URL}/tweet-saved/get-saved-tweet?page=${page}&limit=${limit}&userName=${userName}`,
+            url: ({userID, page = 0, limit = 10}) => `${BASE_URL}/tweet/tweets/${userID}?page=${page}&limit=${limit}`,
             requiresToken: true,
             responseType: 'json'
         },
+        GET_REPOST_TWEETS_BY_USERID: {
+            method: 'GET',
+            url: ({userID, page = 0, limit = 10}) => `${BASE_URL}/tweet-repost/get-repost-tweet/${userID}?page=${page}&limit=${limit}`,
+            requiresToken: true,
+            responseType: 'json'
+        },
+        GET_LOVE_TWEETS_BY_USERID: {
+            method: 'GET',
+            url: ({userID, page = 0, limit = 10}) => `${BASE_URL}/tweet-love/get-tweet-loved/${userID}?page=${page}&limit=${limit}`,
+            requiresToken: true,
+            responseType: 'json'
+        },
+        LOVE_TWEET_BY_USERID: {
+            method: 'POST',
+            url:  ({userName, tweetID}) => `${BASE_URL}/tweet-love/love?userName=${userName}&tweetId=${tweetID}`,
+            requiresToken: true,
+            responseType: 'json'
+        },
+        UNLOVE_TWEET_BY_USERID: {
+            method: 'DELETE',
+            url:  ({userName, tweetID}) => `${BASE_URL}/tweet-love/delete-tweet-loved?userName=${userName}&tweetId=${tweetID}`,
+            requiresToken: true,
+            responseType: 'json'
+        },
+       IS_LOVE_TWEET: {
+            method: 'GET',
+            url:  ({userName, tweetID}) => `${BASE_URL}/tweet-love/is-loved-tweet?userName=${userName}&tweetId=${tweetID}`,
+            requiresToken: true,
+            responseType: 'json'
+        },
+
     },
     AUTH: {
         SIGN_UP: {

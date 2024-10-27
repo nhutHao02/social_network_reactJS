@@ -6,35 +6,34 @@ import { ResponseCode } from "../../service/Code";
 import TweetCard from "../home/components/home/components/tweetCard";
 
 export default function CenterProfile() {
-  
+
   const [tweets, setTweets] = useState([]);
   const [page, setPage] = useState(0);
   const [limnit, _] = useState(10);
-
   const Tabs = {
     POSTS: {
       title: "Posts",
-      endpoint: ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS,
+      endpoint: ENDPOINTS.TWEETS.GET_TWEETS_BY_USERID,
       params: {
-        userName: localStorage.getItem("user"),
+        userID: localStorage.getItem("id"),
         page: page,
         limit: limnit,
       }
     },
     REPOSTS: {
       title: "RePosts",
-      endpoint: ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS,
+      endpoint: ENDPOINTS.TWEETS.GET_REPOST_TWEETS_BY_USERID,
       params: {
-        userName: localStorage.getItem("user"),
+        userID: localStorage.getItem("id"),
         page: page,
         limit: limnit,
       }
     },
     LOVES: {
       title: "Loves",
-      endpoint: ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS,
+      endpoint: ENDPOINTS.TWEETS.GET_LOVE_TWEETS_BY_USERID,
       params: {
-        userName: localStorage.getItem("user"),
+        userID: localStorage.getItem("id"),
         page: page,
         limit: limnit,
       }
@@ -43,7 +42,7 @@ export default function CenterProfile() {
       title: "Bookmarks",
       endpoint: ENDPOINTS.TWEETS.GET_BOOKMARK_TWEETS,
       params: {
-        userName: localStorage.getItem("user"),
+        userID: localStorage.getItem("id"),
         page: page,
         limit: limnit,
       }
@@ -129,6 +128,7 @@ export default function CenterProfile() {
           <TweetCard
             key={index}
             props={{
+              id: tweet.id,
               urlAvt: tweet.user.urlAvt,
               fullName: tweet.user.fullName,
               urlImage: tweet.urlImage,

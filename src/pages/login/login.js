@@ -30,6 +30,7 @@ export default function Login() {
       if (response.code == ResponseCode.OK) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.userName)
+        localStorage.setItem("id", response.data.id)
         navigate("/home");
       } else {
         console.log(response);

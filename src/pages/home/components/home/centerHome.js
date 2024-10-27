@@ -20,6 +20,7 @@ export default function CenterHome() {
       });
       if (response.code == ResponseCode.OK) {
         // setTweets(response.data);
+        console.log(response);
         setTweets((prevTweets) => [...prevTweets, ...response.data]);
         setPage((prevPage) => prevPage + 1);
       } else {
@@ -45,6 +46,7 @@ export default function CenterHome() {
           <TweetCard
             key={index}
             props={{
+              id: tweet.id,
               urlAvt: tweet.user.urlAvt,
               fullName: tweet.user.fullName,
               urlImage: tweet.urlImage,
