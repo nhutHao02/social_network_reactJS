@@ -1,10 +1,35 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import NotificationRow from "./components/NotificationRow";
+import perform from "../../service/Service";
+import ENDPOINTS from "../../service/API";
+import { ResponseCode } from "../../service/Code";
 
 export default function CenterNotifi() {
   const [selected, setSelected] = useState("All");
-  const [notifs, setNotifis] = useState(['item1', 'item2', 'item3'])
+  const [notifs, setNotifis] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        var response = await perform(ENDPOINTS.NOTIFICATION.GET_NOTIFICATIONS, {
+          userID: "6c58ffeb-38ef-46a1-823e-d83a27230200",
+          page: 0,
+          limit: 10,
+        });
+        if (response.code == ResponseCode.OK) {
+          setNotifis(response.data);
+          console.log(response);
+        } else {
+          console.log(response);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="min-w-[50%] h-full ml-[calc(20%+100px)] mr-0">
@@ -43,7 +68,10 @@ export default function CenterNotifi() {
           <NotificationRow
             key={index}
             props={{
-                notif: notif,
+              content: notif.content,
+              urlAvt: notif.user.urlAvt,
+              fullName: notif.user.fullName,
+              userID: notif.user.id
             }}
           />
         ))

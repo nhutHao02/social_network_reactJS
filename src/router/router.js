@@ -7,47 +7,49 @@ import Explore from "../pages/explore/explore";
 import Notification from "../pages/notification/notification";
 import Message from "../pages/message/message";
 import Bookmarks from "../pages/bookmark/bookmark";
+import Profile from "../pages/profile/profile";
+import PrivateRoute from "./privateRouter";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     children: [
       {
         path: "/",
-        element: <Home/>,
+        element: <PrivateRoute element={<Home />} />,
       },
       {
         path: "/home",
-        element: <Home/>,
+        element: <PrivateRoute element={<Home />} />,
       },
       {
         path: "/login",
-        element: <Login/>,
+        element: <Login />,
       },
-      { 
+      {
         path: "/signup",
-        element: <Signup/>
+        element: <Signup />,
       },
-      { 
+      {
         path: "/explore",
-        element: <Explore/>
+        element: <PrivateRoute element={<Explore />} />,
       },
-      { 
+      {
         path: "/notifications",
-        element: <Notification/>
+        element: <PrivateRoute element={<Notification />} />,
       },
-      { 
+      {
         path: "/bookmarks",
-        element: <Bookmarks/>
+        element: <PrivateRoute element={<Bookmarks />} />,
       },
-      { 
+      {
         path: "/message",
-        element: <Message/>
+        element: <PrivateRoute element={<Message />} />,
       },
-      { 
+      {
         path: "/profile",
-        element: <Message/>
+        element: <PrivateRoute element={<Profile />} />,
       },
     ],
   },

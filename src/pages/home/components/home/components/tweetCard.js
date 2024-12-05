@@ -1,7 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import perform from "../../../../../service/Service";
+import ENDPOINTS from "../../../../../service/API";
+import { ResponseCode } from "../../../../../service/Code";
 
 export default function TweetCard({ props }) {
   const [tweet, setTweet] = useState(props);
+  const [loved, setLoved] = useState(false);
+
+  useEffect(() => {
+    const checkIfLoved = async () => {
+      try {
+        if (!tweet.id) return;
+        var response = await perform(ENDPOINTS.TWEETS.IS_LOVE_TWEET, {
+          'userName':localStorage.getItem("user"),
+          'tweetID': tweet.id
+        });
+        if (response.code == ResponseCode.OK) {
+          setLoved(response.data)
+        } 
+      } catch (error) {
+        console.error("Error check loved tweet data:", error);
+      }
+    }
+    checkIfLoved()
+  }, []);
 
   function formatTimeFromNow(dateString) {
     const inputDate = new Date(dateString);
@@ -27,6 +49,46 @@ export default function TweetCard({ props }) {
       const year = inputDate.getFullYear();
       return `${day}/${month}/${year}`;
     }
+  }
+
+  async function loveTweet() {
+    try {
+      var response = await perform(ENDPOINTS.TWEETS.LOVE_TWEET_BY_USERID, {
+        'userName':localStorage.getItem("user"),
+        'tweetID': tweet.id
+      });
+      if (response.code == ResponseCode.OK) {
+        setLoved(true);
+        setTweet(prevTweet => ({
+          ...prevTweet,
+          loves: prevTweet.loves + 1
+        }));
+      } 
+    } catch (error) {
+      console.error("Error check loved tweet data:", error);
+    }
+  }
+
+  async function unLoveTweet() {
+    try {
+      var response = await perform(ENDPOINTS.TWEETS.UNLOVE_TWEET_BY_USERID, {
+        'userName':localStorage.getItem("user"),
+        'tweetID': tweet.id
+      });
+      if (response.code == ResponseCode.OK) {
+        setLoved(false);
+        setTweet(prevTweet => ({
+          ...prevTweet,
+          loves: prevTweet.loves - 1
+        }));
+      } 
+    } catch (error) {
+      console.error("Error check loved tweet data:", error);
+    }
+  }
+
+  function handleLoveClick() {
+    !loved ? loveTweet() : unLoveTweet()
   }
 
   return (
@@ -66,7 +128,7 @@ export default function TweetCard({ props }) {
 
         <div className="flex justify-between py-1 pl-16 pr-5 text-lg">
           <div className="flex justify-center items-center space-x-1">
-            <ion-icon name="heart-outline"></ion-icon>
+            <ion-icon name={loved ? "heart" : "heart-outline"} onClick={handleLoveClick}></ion-icon>
             <p className="w-6 text-left">{tweet.loves}</p>
           </div>
           <div className="flex justify-center items-center space-x-1">

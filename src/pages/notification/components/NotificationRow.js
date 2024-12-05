@@ -10,11 +10,11 @@ export default function NotificationRow({ props }) {
             <div className="flex space-x-2">
               <img
                 className="object-cover rounded-full h-10 w-10 items-center"
-                src="https://img.freepik.com/free-psd/3d-illustration-bald-person-with-glasses_23-2149436184.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1724630400&semt=ais_hybrid"
+                src={notif.urlAvt}
               />
             </div>
-        <p className="text-black font-semibold">Name</p>
-        <p className="line-clamp-2">Ìnor</p>
+        <p className="text-black font-semibold">{notif.fullName}</p>
+        <p className="line-clamp-2">{notif.content}</p>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ export default function RightBar() {
         <div className="px-3 py-1">
           <i class="fa fa-search" aria-hidden="true"></i>
         </div>
-        <input className="bg-gray-300 w-max" placeholder="Search...." />
+        <input className="bg-gray-300 w-max focus:outline-none focus:text-black" placeholder="Search...." />
       </div>
 
       <div className="mx-4 border-2 border-gray-200 rounded-2xl mt-2 bg-gray-200">
